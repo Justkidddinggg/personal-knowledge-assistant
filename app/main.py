@@ -2,6 +2,7 @@ import logging
 
 from fastapi import FastAPI
 
+from app.api.documents import router as documents_router
 from app.config import get_settings
 from app.logging_config import setup_logging
 
@@ -11,6 +12,7 @@ settings.ensure_dirs()
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title=settings.app_name)
+app.include_router(documents_router)
 
 
 @app.get("/health")
