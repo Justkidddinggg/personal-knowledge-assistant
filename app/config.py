@@ -29,12 +29,16 @@ class Settings(BaseSettings):
     chunk_size: int = 800
     chunk_overlap: int = 120
     top_k: int = 5
+    min_retrieval_score: float = 0.3  # starting point from 2 test queries; calibrate in Phase 8
+
+    # Embeddings
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
 
-    # LLM (provider-agnostic; used in Phase 5)
-    llm_provider: str = "openai"
+    # LLM: any OpenAI-compatible endpoint (Ollama by default)
+    llm_base_url: str = "http://localhost:11434/v1"
     llm_api_key: str = ""
     llm_model: str = ""
+    llm_temperature: float = 0.1
 
     def ensure_dirs(self) -> None:
         self.upload_dir.mkdir(parents=True, exist_ok=True)
