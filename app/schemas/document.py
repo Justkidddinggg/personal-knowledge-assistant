@@ -31,3 +31,23 @@ class Chunk:
     page: int | None
     chunk_index: int     # position within the whole document
     text: str
+
+
+
+@dataclass(frozen=True)
+class SearchResult:
+    """A chunk returned by similarity search. `score` is cosine similarity."""
+
+    chunk_id: str
+    doc_id: str
+    filename: str
+    page: int | None
+    text: str
+    score: float
+
+
+@dataclass(frozen=True)
+class DocumentInfo:
+    doc_id: str
+    filename: str
+    num_chunks: int
