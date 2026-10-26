@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     chunk_size: int = 800
     chunk_overlap: int = 120
     top_k: int = 5
+    embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
 
     # LLM (provider-agnostic; used in Phase 5)
     llm_provider: str = "openai"

@@ -20,3 +20,14 @@ class ParsedDocument:
     @property
     def total_chars(self) -> int:
         return sum(len(p.text) for p in self.pages)
+
+@dataclass(frozen=True)
+class Chunk:
+    """A retrievable piece of a document, carrying the metadata for citations."""
+
+    chunk_id: str        # unique, deterministic: "<doc_id[:16]>_<index>"
+    doc_id: str
+    filename: str
+    page: int | None
+    chunk_index: int     # position within the whole document
+    text: str

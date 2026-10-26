@@ -73,3 +73,10 @@ def test_pdf_has_page_numbers(tmp_path: Path) -> None:
     doc = load_document(f)
     assert [p.page for p in doc.pages] == [1, 2]
     assert "page 2" in doc.pages[1].text
+
+def test_clean_text_fixes_thai_sara_am() -> None:
+    assert clean_text("จ\u0e4d\u0e32กัด") == "จำกัด"
+
+
+def test_clean_text_joins_hyphenated_line_breaks() -> None:
+    assert clean_text("capabili-\nties and taxon-\nomy") == "capabilities and taxonomy"

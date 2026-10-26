@@ -6,3 +6,4 @@ pytest
 httpx
 pymupdf
 python-docx
+sentence-transformers
