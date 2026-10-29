@@ -1,20 +1,8 @@
-from collections.abc import Iterator
-
-import pytest
 from fastapi.testclient import TestClient
 
-from app.main import app
 from app.schemas.document import Chunk
-from app.vectorstore.chroma_store import VectorStore, get_vector_store
+from app.vectorstore.chroma_store import VectorStore
 from tests.fakes import FakeEmbedder
-
-
-@pytest.fixture
-def client(store: VectorStore) -> Iterator[TestClient]:
-    # Swap the real database for the temporary one from conftest.py.
-    app.dependency_overrides[get_vector_store] = lambda: store
-    yield TestClient(app)
-    app.dependency_overrides.clear()
 
 
 def add_doc(store: VectorStore, doc_id: str, filename: str, n_chunks: int) -> None:

@@ -45,9 +45,11 @@ def answer_question(
     retriever: SupportsRetrieve,
     llm: ChatLLM,
     doc_ids: list[str] | None = None,
+    search_query: str | None = None,
 ) -> RAGAnswer:
+    """Retrieve with `search_query` (defaults to the question), answer `question`."""
     t0 = time.perf_counter()
-    sources = retriever.retrieve(question, doc_ids)
+    sources = retriever.retrieve(search_query or question, doc_ids)
     t1 = time.perf_counter()
     retrieval_ms = (t1 - t0) * 1000
 
