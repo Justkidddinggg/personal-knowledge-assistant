@@ -8,3 +8,5 @@ data/chroma/*
 !data/chroma/.gitkeep
 .pytest_cache/
 .vscode/
+node_modules/
+web/dist/
