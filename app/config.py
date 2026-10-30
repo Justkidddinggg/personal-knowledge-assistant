@@ -25,6 +25,9 @@ class Settings(BaseSettings):
     upload_dir: Path = BASE_DIR / "data" / "uploads"
     chroma_dir: Path = BASE_DIR / "data" / "chroma"
 
+    # Web frontend origins allowed to call the API from a browser (CORS)
+    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+
     # RAG parameters (tuned in Phase 8)
     chunk_size: int = 800
     chunk_overlap: int = 120

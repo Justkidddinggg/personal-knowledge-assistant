@@ -1,6 +1,7 @@
 import logging
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.ask import router as ask_router
 from app.api.documents import router as documents_router
@@ -14,6 +15,12 @@ settings.ensure_dirs()
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title=settings.app_name)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_origins,  # explicit list, never "*"
+    allow_methods=["GET", "POST", "DELETE"],
+    allow_headers=["Content-Type"],
+)
 register_exception_handlers(app)
 app.include_router(documents_router)
 app.include_router(ask_router)
